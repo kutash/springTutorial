@@ -1,0 +1,89 @@
+@CHARSET "US-ASCII";
+
+.formtable {
+	width: 600px;
+	padding: 10px;
+	border: 1px solid blue;
+}
+
+input[type=text] {
+	width: 250px;
+	
+}
+
+textarea {
+	width: 250px;
+	height: 300px;
+}
+
+.label {
+	text-align: right;
+	vertical-align: top;
+}
+
+.control {
+	margin-left: 10px;
+}
+
+body {
+    background-color: antiquewhite;
+}
+
+.error {
+    font-size: medium;
+    color: red;
+    margin-left: 10px;
+}
+
+.valid {
+    font-size: medium;
+    color: green;
+    margin-left: 10px;
+}
+
+.vis{
+    display: block;
+}
+
+.delete{
+    border-radius: 10%;
+    color: white;
+    background-color: red;
+    width: 120px;
+    height: 40px;
+    font-size: large;
+}
+
+.edit {
+    border-radius: 10%;
+    color: white;
+    background-color: green;
+    width: 120px;
+    height: 40px;
+    font-size: large;
+}
+
+.delete,.edit:hover {
+    opacity: 1;
+}
+
+.message {
+    margin-bottom: 20px;
+    border-bottom: 1px dashed brown;
+}
+
+span.subject {
+    font-size: large;
+    color: brown;
+    font-weight: bold;
+}
+
+span.messagebody {
+    display: block;
+    font-style: italic;
+}
+
+span.name {
+    color: brown;
+    font-size: medium;
+}
