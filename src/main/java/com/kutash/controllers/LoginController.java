@@ -5,12 +5,17 @@ import com.kutash.dao.Message;
 import com.kutash.dao.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.kutash.service.UsersService;
@@ -26,6 +31,9 @@ import java.util.Map;
 public class LoginController {
 
     private UsersService usersService;
+
+    @Autowired
+    private MailSender mailSender;
 
     @Autowired
     public void setUsersService(UsersService usersService) {
@@ -93,5 +101,48 @@ public class LoginController {
     @RequestMapping("/messages")
     public String showMessages() {
         return "messages";
+    }
+
+    /*@RequestMapping(value="/sendmessage", method=RequestMethod.POST, produces="application/json")
+    @ResponseBody
+    public ResponseEntity<Message> sendMessage(Principal principal, @RequestBody Message message) {
+
+        String text = message.getText();
+        String name = message.getUsername();
+        String email = message.getEmail();
+
+        System.out.println(name + ", " + email + ", " + text);
+
+        return new ResponseEntity<Message>(HttpStatus.OK);
+    }*/
+
+    @RequestMapping(value="/sendmessage", method=RequestMethod.POST, produces="application/json")
+    @ResponseBody
+    public Map<String, Object> sendMessage(Principal principal, @RequestBody Map<String, Object> data) {
+
+        System.out.println("before sending");
+        String text = (String)data.get("text");
+        String name = (String)data.get("sender");
+        String email = (String)data.get("email");
+        Integer target = (Integer)data.get("target");
+
+        SimpleMailMessage mail = new SimpleMailMessage();
+        mail.setFrom("kutashgalina16@gmail.com");
+        mail.setTo(email);
+        mail.setSubject("Re: " + name + ", your message");
+        mail.setText(text);
+
+        try {
+            mailSender.send(mail);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Can't send message");
+        }
+        System.out.println("after sending");
+        Map<String, Object> rval = new HashMap<String, Object>();
+        rval.put("success", true);
+        rval.put("target", target);
+
+        return rval;
     }
 }

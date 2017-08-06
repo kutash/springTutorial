@@ -9,6 +9,15 @@
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <filter>
+        <display-name>CsrfHeaderFilter</display-name>
+        <filter-name>CsrfHeaderFilter</filter-name>
+        <filter-class>com.kutash.filter.CsrfHeaderFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CsrfHeaderFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <session-config>
         <session-timeout>20</session-timeout>
     </session-config>

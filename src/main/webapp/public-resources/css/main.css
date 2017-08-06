@@ -87,3 +87,28 @@ span.name {
     color: brown;
     font-size: medium;
 }
+
+form.replyform {
+    padding: 20px;
+    display: none;
+}
+
+form.replyform {
+    padding: 20px;
+    display: none;
+}
+
+textarea.replyarea {
+    width: 400px;
+    height: 250px;
+}
+
+input.replybutton {
+    display: block;
+    font-size: large;
+    border: 1px solid gray;
+}
+
+a.replylink:link {
+    color: brown;
+}
